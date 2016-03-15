@@ -1,6 +1,6 @@
 {
   "name": "log-js",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "An incredibly simple logger.",
   "main": "index.js",
   "dependencies": {
