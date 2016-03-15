@@ -1,0 +1,29 @@
+{
+  "name": "log-js",
+  "version": "1.0.0",
+  "description": "An awesome logger",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "colour": "^0.7.1",
+    "use-strict": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/popey456963/logger.git"
+  },
+  "keywords": [
+    "logger",
+    "console"
+  ],
+  "author": "Alexander Craggs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/popey456963/logger/issues"
+  },
+  "homepage": "https://github.com/popey456963/logger#readme"
+}
