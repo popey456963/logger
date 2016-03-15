@@ -1,70 +1,38 @@
+const chalk = require('chalk')
 var logger = function(m){
-  this.moduleName = m
-}
 
-var colour = require('colour')
-var config = require('../config.js')
-var levels = ['error', 'warn', 'info', 'debug', 'trace']
-if (levels.indexOf(config.loggingLevel) > -1) {
-  var level = levels.indexOf(config.loggingLevel)
-} else {
-  if (!isNaN(config.loggingLevel)) {
-    var level = parseInt(config.loggingLevel)
-  } else {
-    console.log(('Invalid Config Logger Level: ' + config.loggingLevel).yellow)
-    var level = 1
+  this.moduleName = ' [' + m
+  while (this.moduleName.length < 9) { this.moduleName += ' ' }
+  this.moduleName += '] '
+
+  this.l = {
+    error:   chalk.red,    // (0)
+    warning: chalk.yellow, // (1)
+    success: chalk.green,  // (2)
+    log:     chalk.gray,   // (3)
+    info:    chalk.gray,   // (4)
+    date:    chalk.cyan
   }
+
+  this.logLevel = 4
+  this.status = true
 }
 
 logger.prototype.date = function () {
   var date = new Date()
-  return ('[' + String('00' + date.getHours()).slice(-2) + ':' + String('00' + date.getMinutes()).slice(-2) + ':' + String('00' + date.getSeconds()).slice(-2) + ']').cyan
+  return this.l.date('[' + String('00' + date.getHours()).slice(-2) + ':' + String('00' + date.getMinutes()).slice(-2) + ':' + String('00' + date.getSeconds()).slice(-2) + ']')
 }
 
-logger.prototype.s = function (msg) {
-  // return String(JSON.stringify(msg))
-  return String(msg)
-}
+logger.prototype.error =   function (msg) { if (this.logLevel >= 0) this.print(msg, "error")   }
+logger.prototype.warning = function (msg) { if (this.logLevel >= 1) this.print(msg, "warning") }
+logger.prototype.success = function (msg) { if (this.logLevel >= 2) this.print(msg, "success") }
+logger.prototype.log =     function (msg) { if (this.logLevel >= 3) this.print(msg, "log")     }
+logger.prototype.info =    function (msg) { if (this.logLevel >= 4) this.print(msg, "info")    }
 
-logger.prototype.success = function (moduleName, msg) {
-  moduleName = ' [' + moduleName + '] '
-  while (moduleName.length < 9) {
-    moduleName += ' '
+logger.prototype.print = function(msg, code) {
+  if (this.status) {
+    console.log(this.date() + this.moduleName + this.l[code](msg))
   }
-  console.log(this.date() + moduleName + this.s(msg).green)
 }
-
-logger.prototype.log = function (moduleName, msg) {
-  moduleName = ' [' + moduleName + '] '
-  while (moduleName.length < 9) {
-    moduleName += ' '
-  }
-  console.log(this.date() + moduleName + this.s(msg).grey)
-}
-
-logger.prototype.debug = function (moduleName, msg) {
-  moduleName = ' [' + moduleName + '] '
-  while (moduleName.length < 9) {
-    moduleName += ' '
-  }
-  console.log(this.date() + moduleName + this.s(msg).grey)
-}
-
-logger.prototype.warning = function (moduleName, msg) {
-  moduleName = ' [' + moduleName + '] '
-  while (moduleName.length < 9) {
-    moduleName += ' '
-  }
-  console.log(this.date() + moduleName + this.s(msg).yellow)
-}
-
-logger.prototype.error = function (moduleName, msg) {
-  moduleName = ' [' + moduleName + '] '
-  while (moduleName.length < 9) {
-    moduleName += ' '
-  }
-  console.log(this.date() + moduleName + this.s(msg).red)
-}
-
 
 module.exports = function(m){ return new logger(m) };
