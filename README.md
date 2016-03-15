@@ -21,4 +21,4 @@ logger.warning("I'm warning you that something may be going wrong")
 logger.error("I'm warning you that something went very wrong")
 ```
 
-![Console](https://i.imgur.com/tZyMx6k.png)
+![Console](https://i.imgur.com/GBPPc1J.png)
