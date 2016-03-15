@@ -1,4 +1,4 @@
-# logger
+# log-js
 
 > A super-simple logging tool
 
