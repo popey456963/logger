@@ -18,5 +18,7 @@ logger.info("I'm informing you of something")
 logger.log("I'm logging something for you")
 logger.success("I'm showing you how well you did at something")
 logger.warning("I'm warning you that something may be going wrong")
-logger.error("I'm warning you that something went veyr wrong")
+logger.error("I'm warning you that something went very wrong")
 ```
+
+![Console](https://i.imgur.com/tZyMx6k.png)
