@@ -30,6 +30,9 @@ logger.prototype.log =     function (msg) { if (this.logLevel >= 3) this.print(m
 logger.prototype.info =    function (msg) { if (this.logLevel >= 4) this.print(msg, "info")    }
 
 logger.prototype.print = function(msg, code) {
+  var args = Array.prototype.slice.call(arguments);
+  args.pop()
+  args.pop()
   if (this.status) {
     console.log(this.date() + this.moduleName + this.l[code](msg))
   }
