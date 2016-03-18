@@ -7,11 +7,11 @@
 var logger = require('log-js')('app.js')
 
 // set your desired logging level (4 being all, 0 being errors)
-this.logLevel = 3
+logger.logLevel = 3
 
 // turn on/off logging
-this.status = false
-this.status = true
+logger.status = false
+logger.status = true
 
 // start logging!
 logger.info("I'm informing you of something")
