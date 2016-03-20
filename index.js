@@ -1,8 +1,8 @@
 const chalk = require('chalk')
 var logger = function(m){
-
+  this.normalName = m
   this.moduleName = ' [' + m
-  while (this.moduleName.length < 9) { this.moduleName += ' ' }
+  while (this.moduleName.length < 8) { this.moduleName += ' ' }
   this.moduleName += '] '
 
   this.l = {
@@ -16,6 +16,12 @@ var logger = function(m){
 
   this.logLevel = 4
   this.status = true
+}
+
+logger.prototype.changeLength = function(length) {
+  this.moduleName = ' [' + this.normalName
+  while (this.moduleName.length < length) { this.moduleName += ' ' }
+  this.moduleName += '] '
 }
 
 logger.prototype.date = function () {
