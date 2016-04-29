@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 
 var logger = function(m){
-  m = m || module.parent.filename.split("\\").slice(-1)[0]
+  m = m || module.parent.filename.replace(/^.*[\\\/]/, '')
   this.normalName = m
   this.moduleName = ' [' + m
   while (this.moduleName.length < 8) { this.moduleName += ' ' }
