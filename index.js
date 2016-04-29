@@ -1,4 +1,5 @@
 const chalk = require('chalk')
+
 var logger = function(m){
   this.normalName = m
   this.moduleName = ' [' + m
@@ -16,6 +17,7 @@ var logger = function(m){
 
   this.logLevel = 4
   this.status = true
+  this.dateFormat = "[hh:mm:ss]"
 }
 
 logger.prototype.changeLength = function(length) {
@@ -26,21 +28,39 @@ logger.prototype.changeLength = function(length) {
 
 logger.prototype.date = function () {
   var date = new Date()
-  return this.l.date('[' + String('00' + date.getHours()).slice(-2) + ':' + String('00' + date.getMinutes()).slice(-2) + ':' + String('00' + date.getSeconds()).slice(-2) + ']')
+  var individual = {
+    hh: String('00' + date.getHours()).slice(-2),
+    mm: String('00' + date.getMinutes()).slice(-2),
+    ss: String('00' + date.getSeconds()).slice(-2),
+    dd: String('00' + date.getDate()).slice(-2),
+    yyyy: String('0000' + date.getFullYear()).slice(-4),
+    MM: String('00' + (date.getMonth() + 1)).slice(-2),
+  }
+  var keys = Object.keys(individual)
+  var string = this.dateFormat
+  for (i=0; i < keys.length; i++) {
+    string = string.replace(keys[i], individual[keys[i]])
+  }
+
+  return this.l.date(string)
 }
 
-logger.prototype.error =   function (msg) { if (this.logLevel >= 0) this.print(msg, "error")   }
-logger.prototype.warning = function (msg) { if (this.logLevel >= 1) this.print(msg, "warning") }
-logger.prototype.success = function (msg) { if (this.logLevel >= 2) this.print(msg, "success") }
-logger.prototype.log =     function (msg) { if (this.logLevel >= 3) this.print(msg, "log")     }
-logger.prototype.info =    function (msg) { if (this.logLevel >= 4) this.print(msg, "info")    }
+logger.prototype.error =   function (/**/) { if (this.logLevel >= 0) this.print(arguments, "error")   }
+logger.prototype.warning = function (/**/) { if (this.logLevel >= 1) this.print(arguments, "warning") }
+logger.prototype.success = function (/**/) { if (this.logLevel >= 2) this.print(arguments, "success") }
+logger.prototype.log =     function (/**/) { if (this.logLevel >= 3) this.print(arguments, "log")     }
+logger.prototype.info =    function (/**/) { if (this.logLevel >= 4) this.print(arguments, "info")    }
 
 logger.prototype.print = function(msg, code) {
   var args = Array.prototype.slice.call(arguments);
   args.pop()
   args.pop()
   if (this.status) {
-    console.log(this.date() + this.moduleName + this.l[code](msg))
+    fullMessage = []
+    for (i = 0; i < msg.length; i++) {
+      fullMessage.push(msg[i])
+    }
+    console.log(this.date() + this.moduleName + this.l[code](fullMessage.join(" ")))
   }
 }
 
