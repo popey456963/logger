@@ -1,4 +1,4 @@
-var logger = require('./index.js')('test.js')
+var logger = require('./index.js')('file.js')
 
 // set your desired logging level (4 being all, 0 being errors)
 logger.logLevel = 4
@@ -19,3 +19,7 @@ logger.error("I'm warning you that something went very wrong")
 logger.dateFormat = "[ss:mm:hh]"
 logger.success("We changed the date format")
 logger.dateFormat = "[hh:mm:ss]"
+
+// use automatic file name
+var logger = require('./index.js')()
+logger.log("Call the function with no information and it will default to the filename")
