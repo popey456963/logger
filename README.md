@@ -26,7 +26,7 @@ logger.success("We changed the date format")
 logger.dateFormat = "[hh:mm:ss]"
 
 // use automatic file name
-var logger = require('./index.js')()
+var logger = require('log-js')()
 logger.log("Call the function with no information and it will default to the filename")
 ```
 
