@@ -3,7 +3,7 @@
 > A super-simple logging tool
 
 ```node.js
-var logger = require('log-js')('file.js')
+var logger = require('log-js')()
 
 // set your desired logging level (4 being all, 0 being errors)
 logger.logLevel = 4
