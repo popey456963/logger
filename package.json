@@ -4,7 +4,8 @@
   "description": "An incredibly simple logger.",
   "main": "index.js",
   "dependencies": {
-    "chalk": "^1.1.1"
+    "chalk": "^1.1.1",
+    "stack-trace": "^0.0.9"
   },
   "devDependencies": {},
   "scripts": {
